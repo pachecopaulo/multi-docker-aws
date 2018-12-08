@@ -10,7 +10,7 @@ interface MessagePublisher {
 
 @Service
 class RedisMessagePublisher(
-    private val redisTemplate: RedisTemplate<String, Any>,
+    private val redisTemplate: RedisTemplate<String, String>,
     private val channel: ChannelTopic
 ) : MessagePublisher {
 

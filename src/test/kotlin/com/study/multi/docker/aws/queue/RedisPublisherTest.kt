@@ -1,16 +1,14 @@
 package com.study.multi.docker.aws.queue
 
-import com.study.multi.docker.aws.config.RedisConfig
+import com.study.multi.docker.aws.config.RedisConfiguration
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
-import redis.embedded.RedisServer
-import java.util.UUID
 
 @RunWith(SpringRunner::class)
-@ContextConfiguration(classes = [RedisConfig::class])
+@ContextConfiguration(classes = [RedisConfiguration::class])
 class RedisPublisherTest {
 
     @Autowired
@@ -18,13 +16,7 @@ class RedisPublisherTest {
 
     @Test
     fun testPublishMessage() {
-        val embeddedRedis = RedisServer(6379)
-        try {
-            embeddedRedis.start()
-            val message = "Message ${UUID.randomUUID()}"
-            redisMessagePublisher.publish(message)
-        } finally {
-            embeddedRedis.stop()
-        }
+        val message = "5"
+        redisMessagePublisher.publish(message)
     }
 }
