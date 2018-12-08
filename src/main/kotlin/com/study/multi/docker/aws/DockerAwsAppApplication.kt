@@ -1,4 +1,4 @@
-package com.study.docker.aws.dockerawsapp
+package com.study.multi.docker.aws
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

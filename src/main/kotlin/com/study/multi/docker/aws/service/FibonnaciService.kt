@@ -1,4 +1,4 @@
-package com.study.docker.aws.dockerawsapp.service
+package com.study.multi.docker.aws.service
 
 class FibonnaciService {
     companion object {
