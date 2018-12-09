@@ -23,7 +23,7 @@ jobs:
     script: ./gradlew test
     before_script:
     - docker run --name redis-integration-test-db -p 6379:6379 -d redis
-    - docker run --name postgres-integration-test-db -p 5432:5432 -d redis
+    - docker run --name postgres-integration-test-db -p 5432:5432 -d postgres
     after_success:
       - docker build -t pachecopaulo/multi-client ./client
       - docker build -t pachecopaulo/multi-nginx ./nginx
