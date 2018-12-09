@@ -6,23 +6,19 @@ sudo: required
 services:
   - docker
 
-env:
-  - SPRING_REDIS_PORT=6379
-  - SPRING_REDIS_HOST=localhost
-
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 
 jobs:
   include:
-  - stage: frontend
+  - stage: Frontend Build
     script: docker run pachecopaulo/react-test npm test -- --coverage
     before_script:
       - docker build -t pachecopaulo/react-test -f ./client/Dockerfile.dev ./client
-  - stage: lint
+  - stage: Lint
     script: ./gradlew lintKotlin
-  - stage: test
+  - stage: Backend Test
     script: ./gradlew test
     before_script:
       - docker run --name redis-test-db -p 6379:6379 -d redis
@@ -30,9 +26,9 @@ jobs:
       - docker build -t pachecopaulo/multi-client ./client
       - docker build -t pachecopaulo/multi-nginx ./nginx
       - docker build -t pachecopaulo/multi-server .
-  - stage: docker_hub_authentication
+  - stage: Docker Hub Authentication
     script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - stage: pushImage
+  - stage: Push Image
     script:
       - docker push pachecopaulo/multi-client
       - docker push pachecopaulo/multi-nginx
