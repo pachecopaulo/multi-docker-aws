@@ -4,6 +4,7 @@ import com.study.multi.docker.aws.queue.ValuesMessageSubscriber
 import com.study.multi.docker.aws.queue.MessagePublisher
 import com.study.multi.docker.aws.queue.RedisMessagePublisher
 import com.study.multi.docker.aws.repository.RedisRepository
+import com.study.multi.docker.aws.repository.ValuesRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
@@ -19,7 +20,10 @@ import javax.annotation.Resource
 class SubscriberConfiguration {
 
     @Resource
-    private lateinit var fibonacciRepository: RedisRepository
+    private lateinit var redisRepository: RedisRepository
+
+    @Resource
+    private lateinit var valuesRepository: ValuesRepository
 
     @Resource(name = "redisConnectionFactoryConfig")
     private lateinit var redisConnectionFactory: RedisConnectionFactory
@@ -29,7 +33,7 @@ class SubscriberConfiguration {
 
     @Bean
     fun messageListener(): MessageListenerAdapter =
-        MessageListenerAdapter(ValuesMessageSubscriber(fibonacciRepository))
+        MessageListenerAdapter(ValuesMessageSubscriber(redisRepository, valuesRepository))
 
     @Bean
     fun redisContainer(): RedisMessageListenerContainer =
