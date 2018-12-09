@@ -6,9 +6,6 @@ sudo: required
 services:
   - docker
 
-before_install:
-  docker build -t pachecopaulo/react-test -f ./client/Dockerfile.dev ./client
-
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -17,24 +14,26 @@ jobs:
   include:
   - stage: frontend
     script: docker run pachecopaulo/react-test npm test -- --coverage
+    before_script:
+      - docker build -t pachecopaulo/react-test -f ./client/Dockerfile.dev ./client
   - stage: lint
     script: ./gradlew lintKotlin
   - stage: test
     script: ./gradlew test
     before_script:
-    - docker run --name redis-integration-test-db -p 6379:6379 -d redis
-    - docker run --name postgres-integration-test-db -p 5432:5432 -d postgres
+      - docker run --name redis-test-db -p 6379:6379 -d redis
+      - docker run --name postgres-test-db -p 5432:5432 -d postgres
     after_success:
       - docker build -t pachecopaulo/multi-client ./client
       - docker build -t pachecopaulo/multi-nginx ./nginx
       - docker build -t pachecopaulo/multi-server .
-  - stage: DockerHubAuthentication
+  - stage: docker_hub_authentication
     script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - stage: pushImage
     script:
-    - docker push pachecopaulo/multi-client
-    - docker push pachecopaulo/multi-nginx
-    - docker push pachecopaulo/multi-server
+      - docker push pachecopaulo/multi-client
+      - docker push pachecopaulo/multi-nginx
+      - docker push pachecopaulo/multi-server
 #  - stage: deploy
 #    script: skip
 #    before_deploy:
