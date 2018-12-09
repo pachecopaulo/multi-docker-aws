@@ -12,7 +12,7 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer
 
 @Configuration
 @ComponentScan("com.study.multi.docker.aws")
-class RedisConfiguration {
+class DatabaseConfiguration {
 
     @Bean
     fun redisConnectionFactoryConfig() = LettuceConnectionFactory(
