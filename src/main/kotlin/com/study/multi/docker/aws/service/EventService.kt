@@ -21,5 +21,4 @@ class EventService(
 
     fun publishEvent(message: String) =
         redisMessagePublisher.publish(message)
-
 }

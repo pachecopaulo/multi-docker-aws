@@ -1,6 +1,6 @@
 package com.study.multi.docker.aws.config
 
-import com.study.multi.docker.aws.queue.RedisMessageSubscriber
+import com.study.multi.docker.aws.queue.ValuesMessageSubscriber
 import com.study.multi.docker.aws.queue.MessagePublisher
 import com.study.multi.docker.aws.queue.RedisMessagePublisher
 import com.study.multi.docker.aws.repository.RedisRepository
@@ -29,7 +29,7 @@ class SubscriberConfiguration {
 
     @Bean
     fun messageListener(): MessageListenerAdapter =
-        MessageListenerAdapter(RedisMessageSubscriber(fibonacciRepository))
+        MessageListenerAdapter(ValuesMessageSubscriber(fibonacciRepository))
 
     @Bean
     fun redisContainer(): RedisMessageListenerContainer =

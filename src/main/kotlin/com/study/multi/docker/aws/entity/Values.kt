@@ -14,7 +14,7 @@ data class Values(
     val number: Int
 ) {
     companion object {
-        fun generateFibBasedOnIndex(index: Int): Int =
+        fun generateFibBasedUntilIndex(index: Int): Int =
             generateSequence(Pair(0, 1), { Pair(it.second, it.first + it.second) })
                 .map { it.first }
                 .take(index)

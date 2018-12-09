@@ -1,0 +1,23 @@
+version: '3'
+services:
+  postgres-db:
+    image: 'postgres:latest'
+  redis-db:
+    image: 'redis:latest'
+  server:
+    build: .
+    environment:
+      - SPRING_REDIS_HOST=redis-db
+      - SPRING_REDIS_PORT=6379
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/postgres?characterEncoding=utf8
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres_password
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+
+
