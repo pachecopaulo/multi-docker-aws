@@ -26,7 +26,7 @@ The docker-compose has been defined to configure the multi docker images availab
 
 ## Running the application in the docker
 
-First you have to run ```./gradlew build``` docker in order to assembly the components to be picked up by the Dockerfile within the project.
+First you have to run ```./gradlew build docker``` command in order to assembly the components to be picked up by the correctly by the Dockerfile configuration.
 
 Once the above step is complete, you can issue the command: ```docker-compose up --build```
    
