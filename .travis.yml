@@ -6,6 +6,10 @@ sudo: required
 services:
   - docker
 
+env:
+  - SPRING_REDIS_PORT=6379
+  - SPRING_REDIS_HOST=localhost
+
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -22,7 +26,6 @@ jobs:
     script: ./gradlew test
     before_script:
       - docker run --name redis-test-db -p 6379:6379 -d redis
-      - docker run --name postgres-test-db -p 5432:5432 -d postgres
     after_success:
       - docker build -t pachecopaulo/multi-client ./client
       - docker build -t pachecopaulo/multi-nginx ./nginx
@@ -34,10 +37,6 @@ jobs:
       - docker push pachecopaulo/multi-client
       - docker push pachecopaulo/multi-nginx
       - docker push pachecopaulo/multi-server
-#  - stage: deploy
-#    script: skip
-#    before_deploy:
-#    - ./gradlew build
 cache:
   directories:
   - $HOME/.gradle/caches/
