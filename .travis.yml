@@ -15,8 +15,8 @@ before_cache:
 
 jobs:
   include:
-#  - stage: frontend
-#    script: - docker run pachecopaulo/react-test npm test -- --coverage
+  - stage: frontend
+    script: docker run pachecopaulo/react-test npm test -- --coverage
   - stage: lint
     script: ./gradlew lintKotlin
   - stage: test
