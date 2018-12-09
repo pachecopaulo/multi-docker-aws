@@ -12,20 +12,19 @@ before_cache:
 
 jobs:
   include:
-  - stage: Frontend Build
-    script: docker run pachecopaulo/react-test npm test -- --coverage
-    before_script:
-      - docker build -t pachecopaulo/react-test -f ./client/Dockerfile.dev ./client
-  - stage: Lint
-    script: ./gradlew lintKotlin
-  - stage: Backend Test
-    script: ./gradlew test
-    before_script:
-      - docker run --name redis-test-db -p 6379:6379 -d redis
-  - stage: Docker Hub Authentication
-    script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+#  - stage: Frontend Build
+#    script: docker run pachecopaulo/react-test npm test -- --coverage
+#    before_script:
+#      - docker build -t pachecopaulo/react-test -f ./client/Dockerfile.dev ./client
+#  - stage: Lint
+#    script: ./gradlew lintKotlin
+#  - stage: Backend Test
+#    script: ./gradlew test
+#    before_script:
+#      - docker run --name redis-test-db -p 6379:6379 -d redis
   - stage: Build and Push Images
     script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
       - docker build -t pachecopaulo/multi-client ./client
       - docker build -t pachecopaulo/multi-nginx ./nginx
       - docker build -t pachecopaulo/multi-server .
