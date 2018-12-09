@@ -6,8 +6,8 @@ sudo: required
 services:
   - docker
 
-#before_install:
-#  docker build -t pachecopaulo/react-test -f ./client/Dockerfile.dev ./client
+before_install:
+  docker build -t pachecopaulo/react-test -f ./client/Dockerfile.dev ./client
 
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
