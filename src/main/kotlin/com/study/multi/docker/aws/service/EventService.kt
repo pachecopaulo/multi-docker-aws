@@ -14,6 +14,8 @@ class EventService(
     fun getValuesStoredInPostgres() =
         valuesRepository.findAll()
             .map { it.number }
+            .distinct()
+            .joinToString(", ")
 
     fun getValuesStoredInRedis() =
         redisRepository.getAll()
