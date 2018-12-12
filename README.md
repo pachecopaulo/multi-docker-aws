@@ -1,11 +1,12 @@
 # multi-docker-aws
 
-This project is a PoC intended to gain knowledge with Docker, Kubernets and AWS.  
+This project is a PoC intended to play around with Docker, Kubernets and AWS.  
 
 ### Stack
    * Kotlin
    * Spring Boot
    * Redis DB
+   * Travis CI
    * NGINX
    * Postgres
    * React JS
