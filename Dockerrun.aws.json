@@ -5,16 +5,18 @@
       "name": "client",
       "image": "pachecopaulo/multi-client",
       "hostname": "client",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "server",
       "image": "pachecopaulo/multi-server",
       "hostname": "api",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
-      "name": "server",
+      "name": "nginx",
       "image": "pachecopaulo/multi-nginx",
       "essential": true,
       "portMappings": [
@@ -23,7 +25,8 @@
           "containerPort": 80
         }
       ],
-      "links": ["client","server"]
+      "links": ["client", "server"],
+      "memory": 128
     }
   ]
 }
