@@ -31,6 +31,18 @@ jobs:
       - docker push pachecopaulo/multi-client
       - docker push pachecopaulo/multi-nginx
       - docker push pachecopaulo/multi-server
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-2"
+  app: "multi-docker-container "
+  env: "MultiDockerContainer-env"
+  bucket_name: "elasticbeanstalk-eu-west-2-160364560450"
+  bucket_path: "docker-multi"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
 cache:
   directories:
   - $HOME/.gradle/caches/
