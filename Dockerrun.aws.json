@@ -13,7 +13,7 @@
       "image": "pachecopaulo/multi-server",
       "hostname": "api",
       "essential": false,
-      "memory": 128
+      "memory": 1024
     },
     {
       "name": "nginx",
