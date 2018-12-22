@@ -33,7 +33,7 @@ jobs:
       - docker push pachecopaulo/multi-server
    - stage: Deploy
      script: skip
-    deploy:
+     deploy:
       provider: elasticbeanstalk
       region: "eu-west-2"
       app: "multi-docker"
