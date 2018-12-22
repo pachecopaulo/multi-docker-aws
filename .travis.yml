@@ -34,8 +34,8 @@ jobs:
 deploy:
   provider: elasticbeanstalk
   region: "eu-west-2"
-  app: "multi-docker-container "
-  env: "MultiDockerContainer-env"
+  app: "multi-docker"
+  env: "MultiDocker-env"
   bucket_name: "elasticbeanstalk-eu-west-2-160364560450"
   bucket_path: "docker-multi"
   on:
