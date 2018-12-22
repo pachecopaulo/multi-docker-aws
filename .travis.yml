@@ -31,9 +31,10 @@ jobs:
       - docker push pachecopaulo/multi-client
       - docker push pachecopaulo/multi-nginx
       - docker push pachecopaulo/multi-server
-   - stage: Deploy
-     script: skip
-     deploy:
+      - docker push pachecopaulo/multi-server
+  - stage: Deploy
+    script: skip
+    deploy:
       provider: elasticbeanstalk
       region: "eu-west-2"
       app: "multi-docker"
